@@ -12,3 +12,5 @@ Run Notebook
 
 When done, deactivate your environment using `deactivate`.
 
+If you install any packages, run `pip freeze > requirements.txt` so that the changes are tracked and other users can run `pip install -r requirements.txt` to also update.
+
