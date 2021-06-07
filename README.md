@@ -8,7 +8,7 @@ Setup
 
 Run Notebook
 1. Make sure your virtual environment is acvticated (step 2 of setup)
-2. Run `jupyter-notbook`
+2. Run `jupyter-notebook`
 
 When done, deactivate your environment using `deactivate`.
 
