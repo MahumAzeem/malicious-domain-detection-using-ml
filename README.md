@@ -1,4 +1,4 @@
-# ece-470
+# Malicious Domain Detection using ML models
 
 Setup
 1. Create a environment using `python3 -m venv env` or `python -m venv env`
