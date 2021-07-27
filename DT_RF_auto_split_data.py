@@ -21,7 +21,7 @@ columns = ['url','malicious','url_res','hostname_res','path_res',
            'dir_res','single_letter_res','query_res','ratio_upper_lower_res','ip_res','shortened_res','http_res']
 
 #Reads them into results from shuffled output file
-results = pandas.read_csv('../data/kaggle_out.csv', header=None, names=columns)
+results = pandas.read_csv('data/kaggle_out.csv', header=None, names=columns)
 
 
 # In[44]:

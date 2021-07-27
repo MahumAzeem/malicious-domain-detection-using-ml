@@ -25,14 +25,14 @@ columns = ['url','malicious','url_res','hostname_res','path_res',
            'dir_res','single_letter_res','query_res','ratio_upper_lower_res','ip_res','shortened_res','http_res']
 
 #Reads training data into resultsTrain from shuffled output file containing training data
-resultsTrain = pandas.read_csv('../data/kaggle_out.csv', header=None, names=columns)
+resultsTrain = pandas.read_csv('data/kaggle_out.csv', header=None, names=columns)
 
 
 # In[45]:
 
 
 #Reads test data into resultsTest from shuffled output file containing test data
-resultsTest = pandas.read_csv('../data/output_shuff_70.csv', header=None, names=columns)
+resultsTest = pandas.read_csv('data/output_shuff_70.csv', header=None, names=columns)
 
 
 # In[46]:
