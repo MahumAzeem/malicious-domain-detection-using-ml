@@ -1,16 +1,21 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[43]:
 
 
 import pandas
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import metrics 
+from sklearn import tree
+
+import matplotlib
+import matplotlib.pyplot as plt
+#import graphviz
 
 
-# In[2]:
+# In[44]:
 
 
 #Creates the columns for each of the features in csv data
@@ -20,17 +25,17 @@ columns = ['url','malicious','url_res','hostname_res','path_res',
            'dir_res','single_letter_res','query_res','ratio_upper_lower_res','ip_res','shortened_res','http_res']
 
 #Reads training data into resultsTrain from shuffled output file containing training data
-resultsTrain = pandas.read_csv('data/output_shuff_70.csv', header=None, names=columns)
+resultsTrain = pandas.read_csv('../data/kaggle_out.csv', header=None, names=columns)
 
 
-# In[3]:
+# In[45]:
 
 
 #Reads test data into resultsTest from shuffled output file containing test data
-resultsTest = pandas.read_csv('data/output_shuff_30.csv', header=None, names=columns)
+resultsTest = pandas.read_csv('../data/output_shuff_70.csv', header=None, names=columns)
 
 
-# In[4]:
+# In[46]:
 
 
 resultsTrain = resultsTrain.drop([resultsTrain.index[0]]) #this is to delete row with headers
@@ -75,7 +80,7 @@ print(x_train.shape)
 print(y_train.shape)
 
 
-# In[5]:
+# In[47]:
 
 
 resultsTest = resultsTest.drop([resultsTest.index[0]]) #this is to delete row with headers
@@ -121,25 +126,34 @@ print(x_test.shape)
 print(y_test.shape)
 
 
-# In[6]:
+# In[48]:
 
 
 #Creates a decision tree classifier
-tree = DecisionTreeClassifier(max_features=1)
+dtree = DecisionTreeClassifier(max_depth=7, max_features="auto")
 
 #Fits the tree to the training data
-tree.fit(x_train, y_train)
+fitted = dtree.fit(x_train, y_train)
 
 #Makes a prediction on training data
-pred_train = tree.predict(x_train)
+pred_train = dtree.predict(x_train)
 print(pred_train)
 
 #Makes a predicition on test data
-pred_test = tree.predict(x_test)
+pred_test = dtree.predict(x_test)
 print(pred_test)
 
 
-# In[7]:
+# In[49]:
+
+
+#Creates a plot of decision tree
+#plt.figure(figsize=(12,12))
+#tree.plot_tree(fitted, fontsize=10)
+#plt.show()
+
+
+# In[50]:
 
 
 #Prints accuracy of training data based on true values (y_train values, if URL was malicious)
@@ -147,7 +161,7 @@ accuracy_train = metrics.accuracy_score(y_train, pred_train)
 print(accuracy_train)
 
 
-# In[8]:
+# In[51]:
 
 
 #Prints accuracy of training data based on true values (y_test values, if URL was malicious)
@@ -155,7 +169,7 @@ accuracy_test = metrics.accuracy_score(y_test, pred_test)
 print(accuracy_test)
 
 
-# In[9]:
+# In[52]:
 
 
 #Prints error value based on test data accuracy
@@ -163,11 +177,11 @@ error = 1 - accuracy_test
 print(error)
 
 
-# In[10]:
+# In[53]:
 
 
 #Creates a random forest classifier
-forest = RandomForestClassifier(n_estimators=50, max_depth=5)
+forest = RandomForestClassifier(n_estimators=70, max_depth=6, max_features="auto", max_leaf_nodes=30)
 
 #Fits the random forest to the training data
 forest.fit(x_train, y_train)
@@ -181,7 +195,7 @@ pred_test = forest.predict(x_test)
 print(pred_test)
 
 
-# In[11]:
+# In[54]:
 
 
 #Prints accuracy of training data based on true values (y_train values, if URL was malicious)
@@ -189,7 +203,7 @@ accuracy_train = metrics.accuracy_score(y_train, pred_train)
 print(accuracy_train)
 
 
-# In[12]:
+# In[55]:
 
 
 #Prints accuracy of training data based on true values (y_test values, if URL was malicious)
@@ -197,7 +211,7 @@ accuracy_test = metrics.accuracy_score(y_test, pred_test)
 print(accuracy_test)
 
 
-# In[13]:
+# In[56]:
 
 
 #Prints error value based on test data accuracy

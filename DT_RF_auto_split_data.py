@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[19]:
+# In[1]:
 
 
 import pandas
@@ -11,7 +11,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn import metrics 
 
 
-# In[20]:
+# In[2]:
 
 
 #Creates the columns for each of the features in csv data
@@ -21,10 +21,10 @@ columns = ['url','malicious','url_res','hostname_res','path_res',
            'dir_res','single_letter_res','query_res','ratio_upper_lower_res','ip_res','shortened_res','http_res']
 
 #Reads them into results from shuffled output file
-results = pandas.read_csv('data/output_shuff_70.csv', header=None, names=columns)
+results = pandas.read_csv('../data/kaggle_out.csv', header=None, names=columns)
 
 
-# In[21]:
+# In[44]:
 
 
 results = results.drop([results.index[0]]) #this is to delete row with headers
@@ -70,18 +70,18 @@ print(x.shape)
 print(y.shape)
 
 
-# In[22]:
+# In[45]:
 
 
 #Splits data into train and test data sets based on test size. 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 1)
 
 
-# In[23]:
+# In[46]:
 
 
 #Creates a decision tree classifier
-tree = DecisionTreeClassifier(max_features=1, max_depth=1)
+tree = DecisionTreeClassifier()
 
 #Fits the tree to the training data
 tree.fit(x_train, y_train)
@@ -95,7 +95,7 @@ pred_test = tree.predict(x_test)
 print(pred_test)
 
 
-# In[24]:
+# In[47]:
 
 
 #Prints accuracy of training data based on true values (y values, if URL was malicious)
@@ -103,7 +103,7 @@ accuracy_train = metrics.accuracy_score(y_train, pred_train)
 print(accuracy_train)
 
 
-# In[25]:
+# In[48]:
 
 
 #Prints accuracy of test data based on true values (y values, if URL was malicious)
@@ -111,7 +111,7 @@ accuracy_test = metrics.accuracy_score(y_test, pred_test)
 print(accuracy_test)
 
 
-# In[26]:
+# In[49]:
 
 
 #Prints error value based on test data accuracy
@@ -119,11 +119,11 @@ error = 1 - accuracy_test
 print(error)
 
 
-# In[27]:
+# In[50]:
 
 
 #Creates a random forest classifier
-forest = RandomForestClassifier(n_estimators=20)
+forest = RandomForestClassifier()
 
 #Fits the random forest to the training data
 forest.fit(x_train, y_train)
@@ -137,7 +137,7 @@ pred_test = forest.predict(x_test)
 print(pred_test)
 
 
-# In[28]:
+# In[51]:
 
 
 #Prints accuracy of training data based on true values (y values, if URL was malicious)
@@ -145,7 +145,7 @@ accuracy_train = metrics.accuracy_score(y_train, pred_train)
 print(accuracy_train)
 
 
-# In[29]:
+# In[52]:
 
 
 #Prints accuracy of test data based on true values (y values, if URL was malicious)
@@ -153,7 +153,7 @@ accuracy_test = metrics.accuracy_score(y_test, pred_test)
 print(accuracy_test)
 
 
-# In[30]:
+# In[53]:
 
 
 #Prints error value based on test data accuracy
